@@ -1,0 +1,25 @@
+{
+  "name": "kazap-academy-2021-fanpics-api",
+  "version": "1.0.0",
+  "description": "API do fanpics para o Kazap Academy 2021",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigopasc/kazap-academy-2021-fanpics-api.git"
+  },
+  "author": "Rodrigo Paschoaletto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrigopasc/kazap-academy-2021-fanpics-api/issues"
+  },
+  "homepage": "https://github.com/rodrigopasc/kazap-academy-2021-fanpics-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.6.0"
+  }
+}
