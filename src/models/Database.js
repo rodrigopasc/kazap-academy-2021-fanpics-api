@@ -10,7 +10,7 @@ class Database {
     }
 
     async _getMongoClientAndCollection() {
-        const MongoURI = secrets.mongoURI
+        const MongoURI = process.env.NODE_ENV === 'test' ? process.env.MONGO_URL : secrets.mongoURI
 
         const client = await MongoClient.connect(MongoURI, MongoOptions)
         const database = client.db()
@@ -70,6 +70,20 @@ class Database {
             client.close()
 
             return document
+        } catch(error) {
+            throw new Error(error)
+        }
+    }
+
+    async aggregate(query, sort = {}) {
+        const { client, collection } = await this._getMongoClientAndCollection()
+
+        try {
+            const documents = await collection.aggregate(query).sort(sort).toArray()
+
+            client.close()
+
+            return documents
         } catch(error) {
             throw new Error(error)
         }

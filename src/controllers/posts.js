@@ -7,7 +7,18 @@ const methods = {
         const post = new Post()
 
         try {
-            const posts = await post.list({ deletedAt: { $exists: false } })
+            const posts = await post.aggregate([
+                { $match: { deletedAt: { $exists: false } } },
+                {
+                    $lookup: {
+                        from: 'authors',
+                        localField: 'authorId',
+                        foreignField: '_id',
+                        as: 'author'
+                    }
+                },
+                { $unwind: '$author' }
+            ], { createdAt: -1 })
 
             response.status(httpStatus.OK).json(posts)
         } catch(error) {
